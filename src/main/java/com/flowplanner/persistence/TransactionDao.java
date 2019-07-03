@@ -2,9 +2,10 @@ package com.flowplanner.persistence;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TransactionDao implements Dao<Transaction> {
@@ -12,11 +13,17 @@ public class TransactionDao implements Dao<Transaction> {
     private List<Transaction> transactions = new ArrayList<>();
 
     public TransactionDao() {
-        // TODO Create appropriate file mapping, and exception handling.
-        List<Transaction> beans = new CsvToBeanBuilder(FileReader("/home/eddiefiggie/IdeaProjects/FlowPlanner/data/transaction-data.csv"))
-                .withType(Transaction.class).build().parse();
+        // TODO Create appropriate file mapping, and exception handling
+        try {
+            FileReader fr = new FileReader("/home/eddiefiggie/IdeaProjects/FlowPlanner/data/transaction-data.csv");
 
-        this.transactions = beans;
+            List<Transaction> beans = new CsvToBeanBuilder(fr).withType(Transaction.class).build().parse();
+            this.transactions = beans;
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
+
     }
 
     @Override
@@ -36,12 +43,14 @@ public class TransactionDao implements Dao<Transaction> {
 
     @Override
     public void update(Transaction transaction, String[] params) {
-        transaction.setName(Objects.requireNonNull(
-                params[0], "Name cannot be null"));
-        transaction.setEmail(Objects.requireNonNull(
-                params[1], "Email cannot be null"));
+        /*transaction.setDescription(Objects.requireNonNull(
+                params[0], "Description cannot be null"));
+        transaction.setAmount(double.requireNonNull(
+                params[1], "Amount cannot be null"));
+        transaction.setDate(Objects.requireNonNull(
+                params[2], "Date cannot be null"));
 
-        transaction.add(transaction);
+        transaction.add(transaction);*/
     }
 
     @Override

@@ -19,6 +19,9 @@
 *.tar.gz
 *.rar
 
+# Data
+*.csv
+
 # Gradle build
 /build/*
 /.gradle/*

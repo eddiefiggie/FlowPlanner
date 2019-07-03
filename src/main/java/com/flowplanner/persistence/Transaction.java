@@ -15,9 +15,13 @@ public class Transaction {
     @CsvBindByName
     private LocalDate date;
 
-    public Transaction(String description, double value, LocalDate date) {
+    public Transaction() {
+
+    }
+
+    public Transaction(String description, double amount, LocalDate date) {
         this.description = description;
-        this.value = value;
+        this.amount = amount;
         this.date = date;
     }
 
@@ -45,4 +49,6 @@ public class Transaction {
         this.date = date;
     }
 
+    public void add(Transaction transaction) {
+    }
 }
