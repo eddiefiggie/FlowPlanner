@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+
+    id 'application'
+}
+
+version '1.0'
+
+mainClassName = "com.flowplanner.application.flowplannerCLI"
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main{
+        java{
+            srcDir("src/main/java")
+        }
+    }
+}
+
+// Create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'FlowPLannerCLI',
+                'Implementation-Version': version,
+                'Main-Class': 'com.flowplanner.application.flowplannerCLI'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+repositories {
+    //mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.opencsv:opencsv:4.4'
+}
