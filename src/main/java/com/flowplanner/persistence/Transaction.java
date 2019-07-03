@@ -11,7 +11,7 @@ public class Transaction {
     private double amount;
 
     @CsvBindByName
-    private String date;
+    private String date; //TODO: Figure out "date type" treatment
 
     public Transaction() {
 

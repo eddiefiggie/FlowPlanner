@@ -13,10 +13,13 @@ public class flowplannerCLI {
         Dao importedData = new TransactionDao();
         List<Transaction> transactions = importedData.getAll();
 
-        System.out.println("This is a test");
         System.out.println(transactions.get(0).getDescription());
         System.out.println(transactions.get(0).getAmount());
         System.out.println(transactions.get(0).getDate());
+
+        System.out.println(transactions.get(1).getDescription());
+        System.out.println(transactions.get(1).getAmount());
+        System.out.println(transactions.get(1).getDate());
 
     }
 }
