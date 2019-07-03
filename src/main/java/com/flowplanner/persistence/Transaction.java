@@ -2,8 +2,6 @@ package com.flowplanner.persistence;
 
 import com.opencsv.bean.CsvBindByName;
 
-import java.time.LocalDate;
-
 public class Transaction {
 
     @CsvBindByName
@@ -13,13 +11,13 @@ public class Transaction {
     private double amount;
 
     @CsvBindByName
-    private LocalDate date;
+    private String date;
 
     public Transaction() {
 
     }
 
-    public Transaction(String description, double amount, LocalDate date) {
+    public Transaction(String description, double amount, String date) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -41,11 +39,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

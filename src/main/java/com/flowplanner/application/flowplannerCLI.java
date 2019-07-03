@@ -10,8 +10,8 @@ public class flowplannerCLI {
         Dao transactions = new TransactionDao();
 
         System.out.println("This is a test");
+        System.out.println(transactions.get(0).toString());
         System.out.println(transactions.get(1).toString());
-        System.out.println(transactions.get(2).toString());
 
     }
 }
