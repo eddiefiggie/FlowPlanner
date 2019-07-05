@@ -2,6 +2,9 @@ package com.flowplanner.persistence;
 
 import com.opencsv.bean.CsvBindByName;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Transaction {
 
     @CsvBindByName
@@ -11,7 +14,7 @@ public class Transaction {
     private double amount;
 
     @CsvBindByName
-    private String date; //TODO: Figure out "date type" treatment
+    private String date;
 
     public Transaction() {
 

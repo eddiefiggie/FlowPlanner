@@ -2,6 +2,7 @@ package com.flowplanner.persistence;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +11,27 @@ import java.util.Optional;
 
 public class TransactionDao implements Dao<Transaction> {
 
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<Transaction> transactions = new ArrayList<>(); // TODO test without arraylist
 
-    public TransactionDao() {
-        // TODO Create appropriate file mapping, and exception handling
+
+    public TransactionDao(String path) {
+
         try {
-            FileReader fr = new FileReader("/home/eddiefiggie/IdeaProjects/FlowPlanner/data/transaction-data.csv");
 
-            List<Transaction> beans = new CsvToBeanBuilder(fr).withType(Transaction.class).build().parse();
-            this.transactions = beans;
+            FileReader fr = new FileReader(path);
+
+            transactions = new CsvToBeanBuilder<Transaction>(fr)
+                    .withType(Transaction.class)
+                    .build()
+                    .parse();
+
+        }
+        catch (FileNotFoundException fe) {
+            System.out.println("File not found: " + fe);
         }
         catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     @Override
