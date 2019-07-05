@@ -26,7 +26,7 @@ public class Transaction {
         this.date = date;
     }
 
-    public String getDescription() {
+    private String getDescription() {
         return description;
     }
 
@@ -34,7 +34,7 @@ public class Transaction {
         this.description = description;
     }
 
-    public double getAmount() {
+    private double getAmount() {
         return amount;
     }
 
@@ -42,7 +42,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getDate() {
+    private String getDate() {
         return date;
     }
 
@@ -51,5 +51,13 @@ public class Transaction {
     }
 
     public void add(Transaction transaction) {
+    }
+
+    @Override
+    public String toString() {
+        String string;
+        string = "{description: " + getDescription() + ", amount: " + getAmount()
+                + ", date: " + getDate() + "}";
+        return string;
     }
 }

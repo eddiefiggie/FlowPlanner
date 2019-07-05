@@ -26,11 +26,8 @@ public class TransactionDao implements Dao<Transaction> {
                     .parse();
 
         }
-        catch (FileNotFoundException fe) {
-            System.out.println("File not found: " + fe);
-        }
         catch (IOException e) {
-            System.out.println(e);
+            System.out.println("File not found.");
         }
     }
 
