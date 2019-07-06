@@ -1,10 +1,13 @@
 package com.flowplanner.persistence;
 
-import com.opencsv.bean.CsvToBeanBuilder;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,15 +19,22 @@ public class TransactionDao implements Dao<Transaction> {
 
     public TransactionDao(String path) {
 
-        try {
+        try (
+                Reader reader = Files.newBufferedReader(Paths.get(path));
+                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
+                        .withFirstRecordAsHeader()
+                        .withIgnoreHeaderCase()
+                        .withTrim())
+        ){
+            for (CSVRecord csvRecord : csvParser) {
+                String description = csvRecord.get("description");
+                String amount = csvRecord.get("amount");
+                String date = csvRecord.get("date");
 
-            FileReader fr = new FileReader(path);
+                Transaction transaction = new Transaction(description, amount, date);
 
-            transactions = new CsvToBeanBuilder<Transaction>(fr)
-                    .withType(Transaction.class)
-                    .build()
-                    .parse();
-
+                this.transactions.add(transaction);
+            }
         }
         catch (IOException e) {
             System.out.println("File not found.");

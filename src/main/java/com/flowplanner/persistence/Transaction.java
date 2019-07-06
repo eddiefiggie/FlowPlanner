@@ -1,26 +1,14 @@
 package com.flowplanner.persistence;
 
-import com.opencsv.bean.CsvBindByName;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Transaction {
 
-    @CsvBindByName
     private String description;
 
-    @CsvBindByName
-    private double amount;
+    private String amount;
 
-    @CsvBindByName
     private String date;
 
-    public Transaction() {
-
-    }
-
-    public Transaction(String description, double amount, String date) {
+    public Transaction(String description, String amount, String date) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -34,11 +22,11 @@ public class Transaction {
         this.description = description;
     }
 
-    private double getAmount() {
+    private String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
