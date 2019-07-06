@@ -8,16 +8,27 @@ public class DataPathManager {
     final private String PROPERTIES_FILE = "flowplanner.properties";
     final private String PROPERTIES_KEY = "CSV_FILE_PATH";
 
-    private String properties;
     private Properties prop;
     private String csvFilePath;
 
     public DataPathManager() {
-        loadCsvFilePath();
+        loadProperties();
     }
 
     public String getCsvFilePath() {
         return this.csvFilePath;
+    }
+
+    public boolean pathExists() {
+        boolean pathExists;
+        if(this.csvFilePath == null) {
+            pathExists = false;
+            return pathExists;
+        }
+        else {
+            pathExists = true;
+            return pathExists;
+        }
     }
 
     public void setCsvFilePath(String path) {
@@ -34,7 +45,7 @@ public class DataPathManager {
         this.csvFilePath = prop.getProperty(PROPERTIES_KEY);
     }
 
-    private void loadCsvFilePath() {
+    private void loadProperties() {
         try (InputStream input = new FileInputStream(PROPERTIES_FILE)) {
             this.prop = new Properties();
             this.prop.load(input);
@@ -42,7 +53,6 @@ public class DataPathManager {
             this.csvFilePath = prop.getProperty(PROPERTIES_KEY);
 
         } catch (IOException ex) {
-            System.out.println("There is no file path currently set.");
             this.csvFilePath = null;
         }
     }

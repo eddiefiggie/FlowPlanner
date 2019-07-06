@@ -14,7 +14,7 @@ public class flowplannerCLI {
 
         DataPathManager csvPath = new DataPathManager();
 
-        if(csvPath.getCsvFilePath() == null) {
+        if(!csvPath.pathExists()) {
             csvPath.setCsvFilePath(askForCsvPath());
         }
 
