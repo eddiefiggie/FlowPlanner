@@ -1,14 +1,16 @@
 package com.flowplanner.persistence;
 
+import java.time.LocalDate;
+
 public class Transaction {
 
     private String description;
 
-    private String amount;
+    private double amount;
 
-    private String date;
+    private LocalDate date;
 
-    public Transaction(String description, String amount, String date) {
+    public Transaction(String description, double amount, LocalDate date) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -22,19 +24,19 @@ public class Transaction {
         this.description = description;
     }
 
-    private String getAmount() {
+    private double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    private String getDate() {
+    private LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

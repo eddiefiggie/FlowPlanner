@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,8 +30,10 @@ public class TransactionDao implements Dao<Transaction> {
         ){
             for (CSVRecord csvRecord : csvParser) {
                 String description = csvRecord.get("description");
-                String amount = csvRecord.get("amount");
-                String date = csvRecord.get("date");
+                double amount = Double.parseDouble(csvRecord.get("amount"));
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+                LocalDate date = LocalDate.parse(csvRecord.get("date"),formatter);
 
                 Transaction transaction = new Transaction(description, amount, date);
 
