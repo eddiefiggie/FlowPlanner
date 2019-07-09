@@ -1,6 +1,7 @@
 package com.flowplanner.persistence;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Transaction {
 
