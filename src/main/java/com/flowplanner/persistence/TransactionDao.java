@@ -16,8 +16,7 @@ import java.util.Optional;
 
 public class TransactionDao implements Dao<Transaction> {
 
-    private List<Transaction> transactions = new ArrayList<>(); // TODO test without arraylist
-
+    private List<Transaction> transactions = new ArrayList<>();
 
     public TransactionDao(String path) {
 
