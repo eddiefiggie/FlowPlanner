@@ -62,14 +62,14 @@ public class TransactionDao implements Dao<Transaction> {
 
     @Override
     public void update(Transaction transaction, String[] params) {
-        transaction.setDescription(Objects.requireNonNull(
+        /*transaction.setDescription(Objects.requireNonNull(
                 params[0], "Description cannot be null"));
         transaction.setAmount(double.requireNonNull(
                 params[1], "Amount cannot be null"));
         transaction.setDate(Objects.requireNonNull(
                 params[2], "Date cannot be null"));
 
-        transaction.add(transaction);
+        transaction.add(transaction); */
     }
 
     @Override
