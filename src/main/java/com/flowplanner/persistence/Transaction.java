@@ -17,7 +17,7 @@ public class Transaction {
         this.date = date;
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -25,7 +25,7 @@ public class Transaction {
         this.description = description;
     }
 
-    private double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
@@ -33,7 +33,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    private LocalDate getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

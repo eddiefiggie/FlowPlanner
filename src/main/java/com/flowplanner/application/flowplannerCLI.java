@@ -7,7 +7,6 @@ import com.flowplanner.persistence.TransactionDao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Scanner;
 
 public class flowplannerCLI {
@@ -22,7 +21,7 @@ public class flowplannerCLI {
 
         Dao<Transaction> transactions = new TransactionDao(csvPath.getCsvFilePath());
 
-        transactions.getAll().add(createTransaction());
+        transactions.save(createTransaction(), csvPath.getCsvFilePath());
 
         System.out.println(transactions.getAll().get(0));
         System.out.println(transactions.getAll().get(1));

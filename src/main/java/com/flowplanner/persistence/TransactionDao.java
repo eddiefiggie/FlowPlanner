@@ -2,8 +2,10 @@ package com.flowplanner.persistence;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -12,7 +14,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TransactionDao implements Dao<Transaction> {
@@ -56,8 +57,29 @@ public class TransactionDao implements Dao<Transaction> {
     }
 
     @Override
-    public void save(Transaction transaction) {
-        transactions.add(transaction);
+    public void save(Transaction transaction, String path) {
+
+        this.transactions.add(transaction);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path));
+             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                     .withHeader("description", "amount", "date"))
+        ) {
+            int counter = 0;
+            for (Transaction trans : this.transactions) {
+
+                String description = this.transactions.get(counter).getDescription();
+                double amount = this.transactions.get(counter).getAmount();
+                LocalDate date = this.transactions.get(counter).getDate();
+
+                csvPrinter.printRecord(description, amount, date);
+                counter++;
+            }
+            csvPrinter.flush();
+        }
+        catch(IOException e) {
+            // handle exception
+        }
     }
 
     @Override
