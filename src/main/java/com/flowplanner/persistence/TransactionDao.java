@@ -33,7 +33,7 @@ public class TransactionDao implements Dao<Transaction> {
                 String description = csvRecord.get("description");
                 double amount = Double.parseDouble(csvRecord.get("amount"));
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(csvRecord.get("date"),formatter);
 
                 Transaction transaction = new Transaction(description, amount, date);
@@ -70,7 +70,12 @@ public class TransactionDao implements Dao<Transaction> {
 
                 String description = this.transactions.get(counter).getDescription();
                 double amount = this.transactions.get(counter).getAmount();
-                LocalDate date = this.transactions.get(counter).getDate();
+
+                String stringDate = this.transactions.get(counter).getDate().toString();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date = LocalDate.parse(stringDate, formatter);
+
+
 
                 csvPrinter.printRecord(description, amount, date);
                 counter++;

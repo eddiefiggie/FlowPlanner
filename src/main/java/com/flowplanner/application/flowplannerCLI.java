@@ -23,11 +23,11 @@ public class flowplannerCLI {
 
         transactions.save(createTransaction(), csvPath.getCsvFilePath());
 
-        System.out.println(transactions.getAll().get(0));
-        System.out.println(transactions.getAll().get(1));
-        System.out.println(transactions.getAll().get(2));
-        System.out.println(transactions.getAll().get(3));
-
+        int counter = 0;
+        for(Transaction trans : transactions.getAll()) {
+            System.out.println(transactions.getAll().get(counter));
+            counter++;
+        }
     }
 
     private static String askForCsvPath() {
@@ -56,17 +56,17 @@ public class flowplannerCLI {
 
     private static double askForAmount() {
         System.out.print("Enter the transaction dollar amount: ");
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in); // TODO exception handling on bad input (amount)
         double transactionAmount = input.nextDouble();
         return transactionAmount;
     }
 
     private static LocalDate askForDate() {
-        System.out.print("Enter the transaction date [MM/DD/YY]: ");
-        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the transaction date [yyyy-mm-dd]: ");
+        Scanner input = new Scanner(System.in); // TODO exception handling on bad input (date)
         String StringDate = input.nextLine();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
         LocalDate transactionDate = LocalDate.parse(StringDate, formatter);
 
         return transactionDate;
