@@ -24,18 +24,8 @@ public class flowplannerCLI {
         // Showing all transactions
         displayAll(transactions);
 
-        // Find a transaction
-        /* String searchDescription = askForDescriptionSearch();
-        for(Transaction search : transactions.getAll()) {
-            if(search.getDescription().equalsIgnoreCase(searchDescription)) {
-                // Edit a transaction
-                // or
-                // Delete a transaction
-            }
-        } */
+        editTransactions(transactions, csvPath.getCsvFilePath());
 
-        // Create a transaction
-        //transactions.save(createTransaction(), csvPath.getCsvFilePath());
     }
 
     private static void displayAll(Dao<Transaction> transactions) {
@@ -44,6 +34,44 @@ public class flowplannerCLI {
             System.out.println(transactions.getAll().get(counter));
             counter++;
         }
+    }
+
+    private static void editTransactions(Dao<Transaction> transactions, String csvPath) {
+
+        int editType = askForEditType(); // 1 is edit, 2 is delete
+
+
+        if(editType == 1) {
+            displayAll(transactions);
+            String searchDescription = askForDescriptionSearch();
+            // EDIT CODE
+        }
+        else if(editType == 2) {
+            displayAll(transactions);
+            String searchDescription = askForDescriptionSearch();
+            for(Transaction search : transactions.getAll()) {
+
+                if(search.getDescription().equalsIgnoreCase(searchDescription)) {
+                    // need delete code
+                }
+                else {
+                    System.out.println("No transaction with that description was found.");
+                }
+
+            }
+
+        }
+        else if (editType == 3) {
+            transactions.save(createTransaction(), csvPath);
+        }
+
+    }
+
+    private static int askForEditType() {
+        System.out.print("Select modification type. [1] Edit, [2] Delete, or [3] Create: ");
+        Scanner input = new Scanner(System.in);
+        int editType = input.nextInt();
+        return editType;
     }
 
     private static String askForCsvPath() {
