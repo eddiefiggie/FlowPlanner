@@ -22,24 +22,28 @@ public class flowplannerCLI {
         Dao<Transaction> transactions = new TransactionDao(csvPath.getCsvFilePath());
 
         // Showing all transactions
-        int counter = 0;
-        for(Transaction trans : transactions.getAll()) {
-            System.out.println(transactions.getAll().get(counter));
-            counter++;
-        }
+        displayAll(transactions);
 
         // Find a transaction
-        String searchDescription = askForDescriptionSearch();
+        /* String searchDescription = askForDescriptionSearch();
         for(Transaction search : transactions.getAll()) {
             if(search.getDescription().equalsIgnoreCase(searchDescription)) {
                 // Edit a transaction
                 // or
                 // Delete a transaction
             }
-        }
+        } */
 
         // Create a transaction
-        transactions.save(createTransaction(), csvPath.getCsvFilePath());
+        //transactions.save(createTransaction(), csvPath.getCsvFilePath());
+    }
+
+    private static void displayAll(Dao<Transaction> transactions) {
+        int counter = 0;
+        for(Transaction trans : transactions.getAll()) {
+            System.out.println(transactions.getAll().get(counter));
+            counter++;
+        }
     }
 
     private static String askForCsvPath() {
