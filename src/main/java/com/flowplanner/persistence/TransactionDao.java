@@ -100,8 +100,38 @@ public class TransactionDao implements Dao<Transaction> {
     }
 
     @Override
-    public void delete(Transaction transaction) {
+    public void delete(Transaction transaction, String path) {
+
         transactions.remove(transaction);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path));
+             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                     .withHeader("description", "amount", "date"))
+        ) {
+            int counter = 0;
+            for (Transaction trans : this.transactions) {
+                if(trans != null) {
+                    String description = this.transactions.get(counter).getDescription();
+                    double amount = this.transactions.get(counter).getAmount();
+
+                    String stringDate = this.transactions.get(counter).getDate().toString();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate date = LocalDate.parse(stringDate, formatter);
+
+                    csvPrinter.printRecord(description, amount, date);
+                    counter++;
+                }
+
+
+            }
+            csvPrinter.flush();
+
+
+        }
+        catch(IOException e) {
+            // handle exception
+        }
+
     }
 
 }

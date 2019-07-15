@@ -52,10 +52,8 @@ public class flowplannerCLI {
             for(Transaction search : transactions.getAll()) {
 
                 if(search.getDescription().equalsIgnoreCase(searchDescription)) {
-                    // need delete code
-                }
-                else {
-                    System.out.println("No transaction with that description was found.");
+                    transactions.delete(search, csvPath);
+
                 }
 
             }
