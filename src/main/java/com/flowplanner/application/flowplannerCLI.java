@@ -24,6 +24,7 @@ public class flowplannerCLI {
         // Showing all transactions
         displayAll(transactions);
 
+
         editTransactions(transactions, csvPath.getCsvFilePath());
 
     }
@@ -53,7 +54,7 @@ public class flowplannerCLI {
 
                 if(search.getDescription().equalsIgnoreCase(searchDescription)) {
                     transactions.delete(search, csvPath);
-
+                    break;
                 }
 
             }
