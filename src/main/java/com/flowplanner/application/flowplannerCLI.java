@@ -7,6 +7,7 @@ import com.flowplanner.persistence.TransactionDao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class flowplannerCLI {
@@ -21,12 +22,58 @@ public class flowplannerCLI {
 
         Dao<Transaction> transactions = new TransactionDao(csvPath.getCsvFilePath());
 
-        // Showing all transactions
-        displayAll(transactions);
+        // Interface Begins Here --
+        uiBackEnd(transactions, csvPath.getCsvFilePath());
 
+    }
 
-        editTransactions(transactions, csvPath.getCsvFilePath());
+    private static void uiBackEnd(Dao<Transaction> transactions, String csvPath) {
+        int uiSelection = uiFrontEnd();
 
+        while (uiSelection != 5) {
+            if (uiSelection == 0) {
+                uiSelection = uiFrontEnd();
+            }
+            else if (uiSelection == 1) {
+                displayAll(transactions);
+                // Code placeholder
+                uiSelection = 0;
+            } else if (uiSelection == 2) {
+                displayAll(transactions);
+                String searchDescription = askForDescriptionSearch();
+                for (Transaction search : transactions.getAll()) {
+
+                    if (search.getDescription().equalsIgnoreCase(searchDescription)) {
+                        transactions.delete(search, csvPath);
+                        break;
+                    }
+                }
+                uiSelection = 0;
+            }
+            else if (uiSelection == 3) {
+                transactions.save(createTransaction(), csvPath);
+                uiSelection = 0;
+            } else if (uiSelection == 4) {
+                displayAll(transactions);
+                uiSelection = 0;
+            } else if (uiSelection == 5) {
+                // Close Application
+            }
+        }
+    }
+
+    private static int uiFrontEnd() {
+        System.out.print("Select modification type. [1] Edit, [2] Delete, [3] Create, [4] List All, or [5] Exit: ");
+
+        try {
+            Scanner input = new Scanner(System.in);
+            int editType = input.nextInt();
+            return editType;
+            }
+        catch(InputMismatchException e) {
+            System.out.println(invalidEntry());
+            return 0;
+        }
     }
 
     private static void displayAll(Dao<Transaction> transactions) {
@@ -35,42 +82,6 @@ public class flowplannerCLI {
             System.out.println(transactions.getAll().get(counter));
             counter++;
         }
-    }
-
-    private static void editTransactions(Dao<Transaction> transactions, String csvPath) {
-
-        int editType = askForEditType(); // 1 is edit, 2 is delete
-
-
-        if(editType == 1) {
-            displayAll(transactions);
-            String searchDescription = askForDescriptionSearch();
-            // EDIT CODE
-        }
-        else if(editType == 2) {
-            displayAll(transactions);
-            String searchDescription = askForDescriptionSearch();
-            for(Transaction search : transactions.getAll()) {
-
-                if(search.getDescription().equalsIgnoreCase(searchDescription)) {
-                    transactions.delete(search, csvPath);
-                    break;
-                }
-
-            }
-
-        }
-        else if (editType == 3) {
-            transactions.save(createTransaction(), csvPath);
-        }
-
-    }
-
-    private static int askForEditType() {
-        System.out.print("Select modification type. [1] Edit, [2] Delete, or [3] Create: ");
-        Scanner input = new Scanner(System.in);
-        int editType = input.nextInt();
-        return editType;
     }
 
     private static String askForCsvPath() {
@@ -122,5 +133,9 @@ public class flowplannerCLI {
 
     }
 
+    private static String invalidEntry() {
+        String errorMsg = "Invalid Entry, try again: ";
+        return errorMsg;
+    }
 
 }
