@@ -36,7 +36,10 @@ public class TransactionDao implements Dao<Transaction> {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(csvRecord.get("date"),formatter);
 
-                Transaction transaction = new Transaction(description, amount, date);
+                int transactionType = Integer.parseInt(csvRecord.get("transactionType"));
+                int frequency = Integer.parseInt(csvRecord.get("frequency"));
+
+                Transaction transaction = new Transaction(description, amount, date, transactionType, frequency);
 
                 this.transactions.add(transaction);
             }
@@ -74,10 +77,11 @@ public class TransactionDao implements Dao<Transaction> {
                 String stringDate = this.transactions.get(counter).getDate().toString();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(stringDate, formatter);
+                int transactionType = this.transactions.get(counter).getTransactionType();
+                int frequency = this.transactions.get(counter).getFrequency();
 
 
-
-                csvPrinter.printRecord(description, amount, date);
+                csvPrinter.printRecord(description, amount, date, transactionType, frequency);
                 counter++;
             }
             csvPrinter.flush();
@@ -117,11 +121,12 @@ public class TransactionDao implements Dao<Transaction> {
                     String stringDate = this.transactions.get(counter).getDate().toString();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate date = LocalDate.parse(stringDate, formatter);
+                    int transactionType = this.transactions.get(counter).getTransactionType();
+                    int frequency = this.transactions.get(counter).getFrequency();
 
-                    csvPrinter.printRecord(description, amount, date);
+                    csvPrinter.printRecord(description, amount, date, transactionType, frequency);
                     counter++;
                 }
-
 
             }
             csvPrinter.flush();

@@ -96,8 +96,10 @@ public class flowplannerCLI {
         String description = askForDescription();
         double amount = askForAmount();
         LocalDate date = askForDate();
+        int type = askForType();
+        int frequency = askForFrequency();
 
-        Transaction transaction = new Transaction(description, amount, date);
+        Transaction transaction = new Transaction(description, amount, date, type, frequency);
         return transaction;
     }
 
@@ -110,9 +112,23 @@ public class flowplannerCLI {
 
     private static double askForAmount() {
         System.out.print("Enter the transaction dollar amount: ");
-        Scanner input = new Scanner(System.in); // TODO exception handling on bad input (amount)
+        Scanner input = new Scanner(System.in);
         double transactionAmount = input.nextDouble();
         return transactionAmount;
+    }
+
+    private static int askForType() {
+        System.out.print("Select a transaction type, [1] Daily, [2] Monthly: ");
+        Scanner input = new Scanner(System.in);
+        int type = input.nextInt();
+        return type;
+    }
+
+    private static int askForFrequency() {
+        System.out.print("Based on the type selected, what is the frequency of this transaction: ");
+        Scanner input = new Scanner(System.in);
+        int frequency = input.nextInt();
+        return frequency;
     }
 
     private static LocalDate askForDate() {
