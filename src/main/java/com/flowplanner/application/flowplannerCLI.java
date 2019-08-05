@@ -30,11 +30,10 @@ public class flowplannerCLI {
     private static void uiBackEnd(Dao<Transaction> transactions, String csvPath) {
         int uiSelection = uiFrontEnd();
 
-        while (uiSelection != 5) {
+        while (uiSelection != 6) {
             if (uiSelection == 0) {
                 uiSelection = uiFrontEnd();
-            }
-            else if (uiSelection == 1) {
+            } else if (uiSelection == 1) {
                 displayAll(transactions);
                 // Code placeholder
                 uiSelection = 0;
@@ -49,21 +48,22 @@ public class flowplannerCLI {
                     }
                 }
                 uiSelection = 0;
-            }
-            else if (uiSelection == 3) {
+            } else if (uiSelection == 3) {
                 transactions.save(createTransaction(), csvPath);
                 uiSelection = 0;
             } else if (uiSelection == 4) {
                 displayAll(transactions);
                 uiSelection = 0;
             } else if (uiSelection == 5) {
-                // Close Application
+                // Need planner building code
+                uiSelection = 0;
             }
         }
     }
 
     private static int uiFrontEnd() {
-        System.out.print("Select modification type. [1] Edit, [2] Delete, [3] Create, [4] List All, or [5] Exit: ");
+        System.out.print("Select modification type. [1] Edit, [2] Delete, " +
+                "[3] Create, [4] List All, [5] Build Plan, or [6] Exit: ");
 
         try {
             Scanner input = new Scanner(System.in);
