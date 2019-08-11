@@ -20,6 +20,10 @@ public class TransactionDao implements Dao<Transaction> {
 
     private List<Transaction> transactions = new ArrayList<>();
 
+    public TransactionDao() {
+        // A generic transaction pipeline for the cash flow planning output.
+    }
+
     public TransactionDao(String path) {
 
         try (
