@@ -55,7 +55,20 @@ public class flowplannerCLI {
                 displayAll(transactions);
                 uiSelection = 0;
             } else if (uiSelection == 5) {
-                // Need planner building code
+                // Under construction...  TEST CODE HERE
+                String starter = "2019-08-01";
+                String ender = "2019-08-31";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
+                LocalDate start = LocalDate.parse(starter, formatter);
+                LocalDate end = LocalDate.parse(ender, formatter);
+                CashFlowPlan cashFlowPlan = new CashFlowPlan(start, end);
+
+                for(Transaction trans : transactions.getAll()) {
+                    if (cashFlowPlan.isInRange(trans)) {
+                        System.out.println(trans.toString());
+                    }
+                }
+
                 uiSelection = 0;
             }
         }
