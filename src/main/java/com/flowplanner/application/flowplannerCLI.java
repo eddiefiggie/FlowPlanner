@@ -61,12 +61,14 @@ public class flowplannerCLI {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
                 LocalDate start = LocalDate.parse(starter, formatter);
                 LocalDate end = LocalDate.parse(ender, formatter);
-                CashFlowPlan cashFlowPlan = new CashFlowPlan(start, end);
+                CashFlowBuilder cashFlowBuilder = new CashFlowBuilder(start, end);
 
                 for(Transaction trans : transactions.getAll()) {
-                    if (cashFlowPlan.isInRange(trans)) {
-                        System.out.println(trans.toString());
-                    }
+                    cashFlowBuilder.transactionAligner(trans, true);
+                }
+
+                for (Transaction trans : cashFlowBuilder.getAll()) {
+                    System.out.println(trans.toString());
                 }
 
                 uiSelection = 0;

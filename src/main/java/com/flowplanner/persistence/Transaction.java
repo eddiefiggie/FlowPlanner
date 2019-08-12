@@ -11,11 +11,15 @@ public class Transaction {
 
     private LocalDate date;
 
-    private int transactionType;
+    private long transactionType;
 
-    private int frequency;
+    private long frequency;
 
-    public Transaction(String description, double amount, LocalDate date, int frequency, int type) {
+    public Transaction() {
+
+    }
+
+    public Transaction(String description, double amount, LocalDate date, long frequency, long type) {
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -47,19 +51,19 @@ public class Transaction {
         this.date = date;
     }
 
-    public int getTransactionType() {
-        return transactionType;
+    public long getTransactionType() {
+        return this.transactionType;
     }
 
-    public void setTransactionType(int transactionType) {
+    public void setTransactionType(long transactionType) {
         this.transactionType = transactionType;
     }
 
-    public int getFrequency() {
-        return frequency;
+    public long getFrequency() {
+        return this.frequency;
     }
 
-    public void setFrequency(int frequency) {
+    public void setFrequency(long frequency) {
         this.frequency = frequency;
     }
 
