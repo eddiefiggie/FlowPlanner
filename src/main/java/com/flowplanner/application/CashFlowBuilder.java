@@ -42,48 +42,40 @@ public class CashFlowBuilder {
         this.cashFlowPlan.add(transaction);
     }
 
-    public void transactionAligner(Transaction transaction, boolean compare) {
+    public void transactionAligner(Transaction transaction, boolean compare, LocalDate date) {
 
         if (compare) {
             Transaction newTransaction = new Transaction();
             newTransaction.setDescription(transaction.getDescription());
             newTransaction.setAmount(transaction.getAmount());
-            newTransaction.setDate(transaction.getDate());
+            newTransaction.setDate(date);
             newTransaction.setFrequency(transaction.getFrequency());
             newTransaction.setTransactionType(transaction.getTransactionType());
 
             if (isInRange(newTransaction)) {
                 addTransaction(newTransaction);
-                newTransaction = createNewTransaction(newTransaction);
-                compare = compareToEndDate(newTransaction);
-                transactionAligner(newTransaction, compare);
-
-            }
-            else {
-                newTransaction = createNewTransaction(newTransaction);
-                compare = compareToEndDate(newTransaction);
-                transactionAligner(newTransaction, compare);
             }
 
-
+            compare = compareToEndDate(advanceDate(newTransaction));
+            transactionAligner(newTransaction, compare, advanceDate(newTransaction));
         }
     }
 
-    public Transaction createNewTransaction(Transaction transaction) {
-        Transaction newTransaction = transaction;
+    public LocalDate advanceDate(Transaction transaction) {
+        LocalDate date = null;
 
-        if(newTransaction.getTransactionType() == 1) {
-            newTransaction.setDate(newTransaction.getDate().plusMonths(newTransaction.getFrequency()));
+        if(transaction.getTransactionType() == 1) {
+            date = transaction.getDate().plusMonths(transaction.getFrequency());
         }
-        else if(newTransaction.getTransactionType() == 2) {
-            newTransaction.setDate((newTransaction.getDate().plusDays(newTransaction.getFrequency())));
+        else if(transaction.getTransactionType() == 2) {
+            date = transaction.getDate().plusDays(transaction.getFrequency());
         }
-        return newTransaction;
+        return date;
     }
 
-    public boolean compareToEndDate(Transaction transaction) {
+    public boolean compareToEndDate(LocalDate date) {
         boolean compare = false;
-        if (transaction.getDate().isBefore(this.endDate) || transaction.getDate().isEqual(this.endDate)) {
+        if (date.isBefore(this.endDate) || date.isEqual(this.endDate)) {
             compare = true;
         }
         return compare;
