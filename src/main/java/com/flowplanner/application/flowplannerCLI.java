@@ -7,6 +7,8 @@ import com.flowplanner.persistence.TransactionDao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -66,6 +68,8 @@ public class flowplannerCLI {
                 for(Transaction trans : transactions.getAll()) {
                     cashFlowBuilder.transactionAligner(trans, true, trans.getDate());
                 }
+
+                Collections.sort(cashFlowBuilder.getAll());
 
                 for (Transaction trans : cashFlowBuilder.getAll()) {
                     System.out.println(trans.toString());

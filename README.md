@@ -3,4 +3,4 @@ FlowPlanner
 
 TODO:
 
-Test chronology and add break points with blank space.
+Need to create an income break point, then insert fixed spacing for period partitioning.

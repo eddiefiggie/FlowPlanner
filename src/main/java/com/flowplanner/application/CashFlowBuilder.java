@@ -31,7 +31,6 @@ public class CashFlowBuilder {
         boolean isBeforeEnd = transactionDate.isBefore(this.endDate);
         boolean isEqualToEnd = transactionDate.isEqual(this.endDate);
 
-
         if (isAfterStart == true || isEqualToStart == true && isBeforeEnd == true || isEqualToEnd == true) {
             isInRange = true;
         }
