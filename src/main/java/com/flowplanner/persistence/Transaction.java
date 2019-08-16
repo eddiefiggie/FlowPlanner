@@ -1,9 +1,6 @@
 package com.flowplanner.persistence;
 
-import com.flowplanner.application.CashFlowBuilder;
-
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Transaction implements Comparable<Transaction> {
 

@@ -7,7 +7,6 @@ import com.flowplanner.persistence.TransactionDao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -59,7 +58,7 @@ public class flowplannerCLI {
             } else if (uiSelection == 5) {
                 // Under construction...  TEST CODE HERE
                 String starter = "2019-08-01";
-                String ender = "2019-09-30";
+                String ender = "2019-12-31";
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
                 LocalDate start = LocalDate.parse(starter, formatter);
                 LocalDate end = LocalDate.parse(ender, formatter);
@@ -69,6 +68,7 @@ public class flowplannerCLI {
                     cashFlowBuilder.transactionAligner(trans, true, trans.getDate());
                 }
 
+                // Place transactions in order by date.
                 Collections.sort(cashFlowBuilder.getAll());
 
                 for (Transaction trans : cashFlowBuilder.getAll()) {
