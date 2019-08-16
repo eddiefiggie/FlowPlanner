@@ -3,4 +3,4 @@ FlowPlanner
 
 TODO:
 
-Need to create an income break point, then insert fixed spacing for period partitioning.
+Build in an adjustment that treats due dates landing on weekends.

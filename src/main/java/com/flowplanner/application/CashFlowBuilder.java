@@ -38,7 +38,24 @@ public class CashFlowBuilder {
     }
 
     public void addTransaction(Transaction transaction) {
-        this.cashFlowPlan.add(transaction);
+        if(transaction.getTransactionType() == 3) {
+            addTransactionSpacing(transaction.getDate());
+            this.cashFlowPlan.add(transaction);
+        }
+        else {
+            this.cashFlowPlan.add(transaction);
+        }
+    }
+
+    public void addTransactionSpacing(LocalDate date) {
+        for(int counter = 0; counter < 9; counter++) {
+            String description = "*DELETE THIS*";
+            double amount = 0;
+            int frequency = 0;
+            int type = 0;
+            Transaction blank = new Transaction(description, amount, date, frequency, type);
+            this.cashFlowPlan.add(blank);
+        }
     }
 
     public void transactionAligner(Transaction transaction, boolean compare, LocalDate date) {
@@ -66,7 +83,7 @@ public class CashFlowBuilder {
         if(transaction.getTransactionType() == 1) {
             date = transaction.getDate().plusMonths(transaction.getFrequency());
         }
-        else if(transaction.getTransactionType() == 2) {
+        else if(transaction.getTransactionType() == 2 || transaction.getTransactionType() == 3) {
             date = transaction.getDate().plusDays(transaction.getFrequency());
         }
         return date;
