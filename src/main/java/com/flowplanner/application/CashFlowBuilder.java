@@ -88,7 +88,7 @@ public class CashFlowBuilder {
             return date;
         }
         else {
-            return null;
+            return date;
         }
     }
 

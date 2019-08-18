@@ -23,7 +23,7 @@ public class flowplannerCLI {
 
         Dao<Transaction> transactions = new TransactionDao(csvPath.getCsvFilePath());
 
-        // Interface Begins Here --
+        // Interface Launches Here --
         uiBackEnd(transactions, csvPath.getCsvFilePath());
 
     }
@@ -36,7 +36,7 @@ public class flowplannerCLI {
                 uiSelection = uiFrontEnd();
             } else if (uiSelection == 1) {
                 displayAll(transactions);
-                // Code placeholder
+                // Not implemented
                 uiSelection = 0;
             } else if (uiSelection == 2) {
                 displayAll(transactions);
@@ -57,11 +57,13 @@ public class flowplannerCLI {
                 uiSelection = 0;
             } else if (uiSelection == 5) {
                 // Under construction...  TEST CODE HERE
-                String starter = "2019-08-01";
-                String ender = "2019-08-31";
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
-                LocalDate start = LocalDate.parse(starter, formatter);
-                LocalDate end = LocalDate.parse(ender, formatter);
+                System.out.println("** START OF REPORT **");
+                LocalDate start = askForDate();
+                System.out.println("** END OF REPORT **");
+                LocalDate end = askForDate();
+                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                //LocalDate start = LocalDate.parse(starter, formatter);
+                //LocalDate end = LocalDate.parse(ender, formatter);
                 CashFlowBuilder cashFlowBuilder = new CashFlowBuilder(start, end);
 
                 for(Transaction trans : transactions.getAll()) {
@@ -151,11 +153,11 @@ public class flowplannerCLI {
     }
 
     private static LocalDate askForDate() {
-        System.out.print("Enter the transaction date [yyyy-mm-dd]: ");
-        Scanner input = new Scanner(System.in); // TODO exception handling on bad input (date)
+        System.out.print("Enter the date [yyyy-mm-dd]: ");
+        Scanner input = new Scanner(System.in);
         String StringDate = input.nextLine();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate transactionDate = LocalDate.parse(StringDate, formatter);
 
         return transactionDate;
@@ -172,5 +174,4 @@ public class flowplannerCLI {
         String errorMsg = "Invalid Entry, try again: ";
         return errorMsg;
     }
-
 }
