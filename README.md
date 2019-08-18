@@ -3,6 +3,8 @@ FlowPlanner
 
 TODO:
 
+Create output for cashFlowPlan via CSV
+
 Presently, dates in the CSV file must fall before the target date range for a cash flow plan.  Transaction dates that
 fall within, or fall after the target date range may be unpredictable.  Some method to treat this should be added.
 
