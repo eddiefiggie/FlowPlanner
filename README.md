@@ -14,3 +14,9 @@ Need to ensure error handling for all data inputs needs to be verified and added
 I should probably, move the CashFlowBuilder into the persistence package using a standard DAO.  I'm still contemplating
 this.
 
+The current pay period break point is a transaction type 3.  There's likely an betetr way to do this.  This, however, 
+was simple and got the job done.  I should consider implementing a better way.  Blank space separation gets applied 
+right before this transaction type (3).   
+
+Transaction Edit, option #1 was not implemented.  Was simply too easy to edit the CSV directly.  I'll revisit this.
+
