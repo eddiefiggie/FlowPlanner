@@ -69,11 +69,26 @@ public class CashFlowBuilder {
             newTransaction.setTransactionType(transaction.getTransactionType());
 
             if (isInRange(newTransaction)) {
+                LocalDate adjustedForWeekend = adjustDateForWeekend(newTransaction.getDate());
+                newTransaction.setDate(adjustedForWeekend);
                 addTransaction(newTransaction);
             }
-
             compare = compareToEndDate(advanceDate(newTransaction));
             transactionAligner(newTransaction, compare, advanceDate(newTransaction));
+        }
+    }
+
+    public LocalDate adjustDateForWeekend(LocalDate date) {
+        if(date.getDayOfWeek().getValue() == 6) {
+            date = date.minusDays(3);
+            return date;
+        }
+        else if(date.getDayOfWeek().getValue() == 7) {
+            date = date.minusDays(4);
+            return date;
+        }
+        else {
+            return null;
         }
     }
 

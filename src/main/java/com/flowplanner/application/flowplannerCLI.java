@@ -58,7 +58,7 @@ public class flowplannerCLI {
             } else if (uiSelection == 5) {
                 // Under construction...  TEST CODE HERE
                 String starter = "2019-08-01";
-                String ender = "2019-12-31";
+                String ender = "2019-08-31";
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // TODO Centralize formatter
                 LocalDate start = LocalDate.parse(starter, formatter);
                 LocalDate end = LocalDate.parse(ender, formatter);
