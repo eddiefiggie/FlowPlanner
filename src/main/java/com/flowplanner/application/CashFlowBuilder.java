@@ -1,8 +1,15 @@
 package com.flowplanner.application;
 
 import com.flowplanner.persistence.Transaction;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +77,6 @@ public class CashFlowBuilder {
 
             if (isInRange(newTransaction)) {
                 LocalDate adjustedForWeekend = adjustDateForWeekend(newTransaction.getDate());
-                newTransaction.setDate(adjustedForWeekend);
                 addTransaction(newTransaction);
             }
             compare = compareToEndDate(advanceDate(newTransaction));
@@ -110,5 +116,34 @@ public class CashFlowBuilder {
             compare = true;
         }
         return compare;
+    }
+
+    public void exportPlan() {
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("export.csv"));
+             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                     .withHeader("description", "amount", "date"))
+        ) {
+            int counter = 0;
+            for (Transaction trans : this.cashFlowPlan) {
+
+                String description = this.cashFlowPlan.get(counter).getDescription();
+                double amount = this.cashFlowPlan.get(counter).getAmount();
+
+                String stringDate = this.cashFlowPlan.get(counter).getDate().toString();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date = LocalDate.parse(stringDate, formatter);
+
+                // If a date is on a weekend, make it the Wednesday before.
+                date = adjustDateForWeekend(date);
+
+                csvPrinter.printRecord(description, amount, date);
+                counter++;
+            }
+            csvPrinter.flush();
+        }
+        catch(IOException e) {
+            // handle exception
+        }
     }
 }

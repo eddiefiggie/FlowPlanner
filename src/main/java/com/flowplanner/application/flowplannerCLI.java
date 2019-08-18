@@ -35,8 +35,8 @@ public class flowplannerCLI {
             if (uiSelection == 0) {
                 uiSelection = uiFrontEnd();
             } else if (uiSelection == 1) {
-                displayAll(transactions);
                 // Not implemented
+                System.out.println("This feature is not implemented.");
                 uiSelection = 0;
             } else if (uiSelection == 2) {
                 displayAll(transactions);
@@ -61,9 +61,7 @@ public class flowplannerCLI {
                 LocalDate start = askForDate();
                 System.out.println("** END OF REPORT **");
                 LocalDate end = askForDate();
-                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                //LocalDate start = LocalDate.parse(starter, formatter);
-                //LocalDate end = LocalDate.parse(ender, formatter);
+
                 CashFlowBuilder cashFlowBuilder = new CashFlowBuilder(start, end);
 
                 for(Transaction trans : transactions.getAll()) {
@@ -73,9 +71,9 @@ public class flowplannerCLI {
                 // Place transactions in order by date.
                 Collections.sort(cashFlowBuilder.getAll());
 
-                for (Transaction trans : cashFlowBuilder.getAll()) {
-                    System.out.println(trans.toString());
-                }
+                // Creates the CSV file
+                cashFlowBuilder.exportPlan();
+                System.out.println("Cash flow report generation successful. Created a new: export.csv");
 
                 uiSelection = 0;
             }

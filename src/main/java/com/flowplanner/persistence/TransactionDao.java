@@ -71,7 +71,7 @@ public class TransactionDao implements Dao<Transaction> {
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path));
              CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                     .withHeader("description", "amount", "date"))
+                     .withHeader("description", "amount", "date", "frequency", "transactionType"))
         ) {
             int counter = 0;
             for (Transaction trans : this.transactions) {
@@ -145,5 +145,4 @@ public class TransactionDao implements Dao<Transaction> {
         }
 
     }
-
 }
