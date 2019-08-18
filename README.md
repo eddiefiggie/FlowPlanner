@@ -18,3 +18,5 @@ right before this transaction type (3).
 * Transaction Edit, option #1 was not implemented.  Was simply too easy to edit the CSV directly.  I'll revisit this.
 
 * Note, all date formats are presently:  yyyy-MM-dd
+
+* Need to add UI to capture output drive for the cash flow plan.  
