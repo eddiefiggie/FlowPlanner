@@ -79,6 +79,16 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     public int compareTo(Transaction transaction) {
-        return this.date.compareTo(transaction.getDate());
+        int comp = this.date.compareTo(transaction.getDate());
+        if(comp != 0) {
+            return comp;
+        }
+        else {
+            int transactionAmount = (int) transaction.getAmount();
+            int baseAmount = (int) this.amount;
+            comp = transactionAmount - baseAmount;
+            return comp;
+        }
+        // return this.date.compareTo(transaction.getDate());
     }
 }

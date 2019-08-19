@@ -20,3 +20,8 @@ right before this transaction type (3).
 * Note, all date formats are presently:  yyyy-MM-dd
 
 * Need to add UI to capture output drive for the cash flow plan.  
+
+* Right now, so to avoid transactions landing on and splitting up the pay periods (assuming multiple and concurrent 
+pay periods), I added the amount field.  by doing this, I was able to add an && to the weekend date adjustment so 
+Thursday and Friday would also need to be a negative number (therefore not income) to be set back to the previous 
+Wednesday.
