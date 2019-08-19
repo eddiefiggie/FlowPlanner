@@ -25,3 +25,5 @@ right before this transaction type (3).
 pay periods), I added the amount field.  by doing this, I was able to add an && to the weekend date adjustment so 
 Thursday and Friday would also need to be a negative number (therefore not income) to be set back to the previous 
 Wednesday.
+
+* Dates in CSV output keep adjusting with the weekend rollback functionality.  Known bug.
