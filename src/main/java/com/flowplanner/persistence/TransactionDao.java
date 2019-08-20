@@ -137,8 +137,6 @@ public class TransactionDao implements Dao<Transaction> {
 
             }
             csvPrinter.flush();
-
-
         }
         catch(IOException e) {
             // handle exception

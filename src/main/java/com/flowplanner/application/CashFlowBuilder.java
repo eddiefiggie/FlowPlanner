@@ -76,10 +76,7 @@ public class CashFlowBuilder {
             newTransaction.setTransactionType(transaction.getTransactionType());
 
             if (isInRange(newTransaction)) {
-                LocalDate dateAdjust = newTransaction.getDate();
-                double isNegativeAmount = newTransaction.getAmount();
-                LocalDate adjustedForWeekend = adjustDateForWeekend(dateAdjust, isNegativeAmount);
-                newTransaction.setDate(adjustedForWeekend);
+                newTransaction.setDate(date);
                 addTransaction(newTransaction);
             }
             compare = compareToEndDate(advanceDate(newTransaction));
@@ -146,7 +143,7 @@ public class CashFlowBuilder {
                 LocalDate date = LocalDate.parse(stringDate, formatter);
 
                 // If a date is on a weekend, make it the Wednesday before.
-                date = adjustDateForWeekend(date, amount);
+                // date = adjustDateForWeekend(date, amount);
 
                 csvPrinter.printRecord(date, description, amount);
                 counter++;

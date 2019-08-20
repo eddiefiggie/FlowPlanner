@@ -64,8 +64,13 @@ public class flowplannerCLI {
 
                 CashFlowBuilder cashFlowBuilder = new CashFlowBuilder(start, end);
 
+                // Builds a list of transactions in the qualified date range
                 for(Transaction trans : transactions.getAll()) {
                     cashFlowBuilder.transactionAligner(trans, true, trans.getDate());
+                }
+
+                for(Transaction trans : cashFlowBuilder.getAll()) {
+                    trans.setDate(cashFlowBuilder.adjustDateForWeekend(trans.getDate(), trans.getAmount()));
                 }
 
                 // Place transactions in order by date.
@@ -73,6 +78,7 @@ public class flowplannerCLI {
 
                 // Creates the CSV file
                 cashFlowBuilder.exportPlan();
+
                 System.out.println("Cash flow report generation successful. Created a new: export.csv");
 
                 uiSelection = 0;
