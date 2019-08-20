@@ -142,9 +142,6 @@ public class CashFlowBuilder {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(stringDate, formatter);
 
-                // If a date is on a weekend, make it the Wednesday before.
-                // date = adjustDateForWeekend(date, amount);
-
                 csvPrinter.printRecord(date, description, amount);
                 counter++;
             }

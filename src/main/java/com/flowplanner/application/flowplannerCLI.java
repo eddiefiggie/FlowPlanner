@@ -56,10 +56,9 @@ public class flowplannerCLI {
                 displayAll(transactions);
                 uiSelection = 0;
             } else if (uiSelection == 5) {
-                // Under construction...  TEST CODE HERE
-                System.out.println("** START OF REPORT **");
+                System.out.println("** START OF REPORT DATE **");
                 LocalDate start = askForDate();
-                System.out.println("** END OF REPORT **");
+                System.out.println("** END OF REPORT DATE **");
                 LocalDate end = askForDate();
 
                 CashFlowBuilder cashFlowBuilder = new CashFlowBuilder(start, end);
