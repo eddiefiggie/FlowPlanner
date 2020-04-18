@@ -9,10 +9,7 @@ transaction falls after the specified range, it may be unpredictable.  Some meth
 * Need to ensure error handling for all data inputs needs to be verified and added.  Date entry for example is quite 
 vulnerable.
 
-* I should probably, move the CashFlowBuilder into the persistence package using a standard DAO.  I'm still contemplating
-this.
-
-* The current pay period break point is a transaction type 3.  There's likely an betetr way to do this.  This, however, 
+* The current pay period break point is a transaction type 3.  There's likely a better way to do this.  This, however, 
 was simple and got the job done.  I should consider implementing a better way.  Blank space separation gets applied 
 right before this transaction type (3).   
 
@@ -26,4 +23,6 @@ right before this transaction type (3).
 pay periods), I added the amount field.  by doing this, I was able to add an && to the weekend date adjustment so 
 Thursday and Friday would also need to be a negative number (therefore not income) to be set back to the previous 
 Wednesday.
+
+* As of the latest update.  I killed all export and edits via the application.  These things would be handled within the CSV file for now. 
 
