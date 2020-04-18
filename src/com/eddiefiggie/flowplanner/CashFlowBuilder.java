@@ -1,15 +1,6 @@
-package com.flowplanner.application;
+package com.eddiefiggie.flowplanner;
 
-import com.flowplanner.persistence.Transaction;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,28 +118,6 @@ public class CashFlowBuilder {
     }
 
     public void exportPlan() {
-
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("export.csv"));
-             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                     .withHeader("description", "amount", "date"))
-        ) {
-            int counter = 0;
-            for (Transaction trans : this.cashFlowPlan) {
-
-                String description = this.cashFlowPlan.get(counter).getDescription();
-                double amount = this.cashFlowPlan.get(counter).getAmount();
-
-                String stringDate = this.cashFlowPlan.get(counter).getDate().toString();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate date = LocalDate.parse(stringDate, formatter);
-
-                csvPrinter.printRecord(date, description, amount);
-                counter++;
-            }
-            csvPrinter.flush();
-        }
-        catch(IOException e) {
-            // handle exception
-        }
+        // not used
     }
 }

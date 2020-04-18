@@ -1,4 +1,4 @@
-package com.flowplanner.persistence;
+package com.eddiefiggie.flowplanner;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,4 @@
-package com.flowplanner.application;
-
-import com.flowplanner.persistence.Dao;
-import com.flowplanner.persistence.DataPathManager;
-import com.flowplanner.persistence.Transaction;
-import com.flowplanner.persistence.TransactionDao;
+package com.eddiefiggie.flowplanner;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +6,7 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class flowplannerCLI {
+public class FlowPlannerCLI {
 
     public static void main(String[] args) {
 
