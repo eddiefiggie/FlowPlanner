@@ -21,6 +21,7 @@
 
 # Data
 *.csv
+*.properties
 
 # Gradle build
 /build/*
