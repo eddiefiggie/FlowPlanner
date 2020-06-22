@@ -1,5 +1,6 @@
 # FlowPlanner
 
+JAVA VERSION: 11
 
 **TODO & Notes:**
 
