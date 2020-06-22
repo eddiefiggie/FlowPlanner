@@ -1,8 +1,11 @@
 package com.eddiefiggie.flowplanner;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CashFlowBuilder {
 
@@ -117,7 +120,16 @@ public class CashFlowBuilder {
         return compare;
     }
 
-    public void exportPlan() {
-        // not used
+    public void exportPlan() throws FileNotFoundException {
+        String outputFileName = "output.csv";
+        PrintWriter csvOut =  new PrintWriter(outputFileName);
+
+        for(int count = 0; count < cashFlowPlan.size(); count++) {
+            String record = String.format("%s", this.cashFlowPlan.get(count).toString());
+            csvOut.printf("%s\n", record);
+        }
+        csvOut.close();
+
+        System.out.println("Cash flow report generation successful. Created a new: output.csv");
     }
 }

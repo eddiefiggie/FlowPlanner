@@ -1,5 +1,6 @@
 package com.eddiefiggie.flowplanner;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class FlowPlannerCLI {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         DataPathManager csvPath = new DataPathManager();
 
@@ -23,7 +24,7 @@ public class FlowPlannerCLI {
 
     }
 
-    private static void uiBackEnd(Dao<Transaction> transactions, String csvPath) {
+    private static void uiBackEnd(Dao<Transaction> transactions, String csvPath) throws FileNotFoundException {
         int uiSelection = uiFrontEnd();
 
         while (uiSelection != 6) {
@@ -72,8 +73,6 @@ public class FlowPlannerCLI {
 
                 // Creates the CSV file
                 cashFlowBuilder.exportPlan();
-
-                System.out.println("Cash flow report generation successful. Created a new: export.csv");
 
                 uiSelection = 0;
             }

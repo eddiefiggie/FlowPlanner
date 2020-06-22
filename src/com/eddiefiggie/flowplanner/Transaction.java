@@ -72,9 +72,9 @@ public class Transaction implements Comparable<Transaction> {
     @Override
     public String toString() {
         String string;
-        string = "{description: " + getDescription() + ", amount: " + getAmount()
-                + ", date: " + getDate() + ", type: " + getTransactionType()
-                + ", frequency: " + getFrequency() + "}";
+        string = getDescription() + "," + getAmount()
+                + "," + getDate() + "," + getTransactionType()
+                + "," + getFrequency() + ",";
         return string;
     }
 

@@ -24,6 +24,3 @@ pay periods), I added the amount field.  by doing this, I was able to add an && 
 Thursday and Friday would also need to be a negative number (therefore not income) to be set back to the previous 
 Wednesday.
 
-* As of the latest update.  I killed all export and edits via the application.  These things would be handled within the CSV file for now. 
-
-
