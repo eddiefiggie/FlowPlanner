@@ -39,7 +39,7 @@ public class CashFlowBuilder {
     }
 
     public void addTransaction(Transaction transaction) {
-        if(transaction.getTransactionType() == 3) {
+        if(transaction.getDescription().equals("***** Vernon Pay Check")) {
             addTransactionSpacing(transaction.getDate());
             this.cashFlowPlan.add(transaction);
         }
@@ -59,7 +59,14 @@ public class CashFlowBuilder {
         }
     }
 
-    public void transactionAligner(Transaction transaction, boolean compare, LocalDate date) {
+    public void transactionAligner(Transaction transaction, LocalDate date) {
+        boolean compare;
+        if(compareToEndDate(date)) {
+            compare = true;
+        }
+        else {
+            compare = false;
+        }
 
         if (compare) {
             Transaction newTransaction = new Transaction();
@@ -73,8 +80,10 @@ public class CashFlowBuilder {
                 newTransaction.setDate(date);
                 addTransaction(newTransaction);
             }
+
+            // possible issue here?
             compare = compareToEndDate(advanceDate(newTransaction));
-            transactionAligner(newTransaction, compare, advanceDate(newTransaction));
+            transactionAligner(newTransaction, advanceDate(newTransaction));
         }
     }
 

@@ -61,7 +61,7 @@ public class FlowPlannerCLI {
 
                 // Builds a list of transactions in the qualified date range
                 for(Transaction trans : transactions.getAll()) {
-                    cashFlowBuilder.transactionAligner(trans, true, trans.getDate());
+                    cashFlowBuilder.transactionAligner(trans, trans.getDate());
                 }
 
                 for(Transaction trans : cashFlowBuilder.getAll()) {
