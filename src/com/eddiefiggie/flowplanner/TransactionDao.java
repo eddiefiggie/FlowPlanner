@@ -29,7 +29,6 @@ public class TransactionDao implements Dao<Transaction> {
                     LocalDate date = LocalDate.parse(csvData.getData().get(count++),formatter);
                     int frequency = Integer.parseInt(csvData.getData().get(count++));
                     int transactionType = Integer.parseInt(csvData.getData().get(count++));
-                    count++;
 
                     Transaction transaction = new Transaction(description, amount, date, frequency, transactionType);
                     this.transactions.add(transaction);
